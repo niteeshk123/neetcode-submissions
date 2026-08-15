@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        int n = nums.size();
+        unordered_map<int, int> mp;
+        for(auto num:nums){
+            mp[num]++;
+        }
+
+        vector<vector<int>> freq(n+1);
+        for(auto it:mp){
+            freq[it.second].push_back(it.first);
+        }
+
+        int i = n;
+        vector<int> res;
+        while(k){
+            for(auto num: freq[i]){
+                res.push_back(num);
+                k--;
+                if(k==0){
+                    break;
+                }
+            }
+            i--;
+        }
+
+        return res;
+    }
+};
